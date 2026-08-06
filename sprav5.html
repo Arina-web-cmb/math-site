@@ -55,6 +55,119 @@
             font-size: 1.1rem;
             color: #2c3e50;
         }
+        .scene {
+            width: 200px;
+            height: 150px;
+            perspective: 600px; 
+            margin: 20px 0;
+            display: block;
+        }
+        .cube-3d {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(-20deg) rotateY(-35deg); 
+        }
+        .cube-3d .face {
+            position: absolute;
+            border: 2px solid #000000; 
+            background-color: rgba(255, 255, 255, 0.4); 
+            box-sizing: border-box;
+        }
+
+        .standard-cube .face { width: 80px; height: 80px; }
+        .standard-cube .front  { transform: translateZ(40px); }
+        .standard-cube .back   { transform: rotateY(180deg) translateZ(40px); }
+        .standard-cube .right  { transform: rotateY(90deg) translateZ(40px); }
+        .standard-cube .left   { transform: rotateY(-90deg) translateZ(40px); }
+        .standard-cube .top    { transform: rotateX(90deg) translateZ(40px); }
+        .standard-cube .bottom { transform: rotateX(-90deg) translateZ(40px); }
+
+        .box-3d .front, .box-3d .back { width: 130px; height: 70px; }
+        .box-3d .right, .box-3d .left { width: 60px; height: 70px; }
+        .box-3d .top, .box-3d .bottom { width: 130px; height: 60px; }
+
+        .box-3d .front  { transform: translateZ(30px); }
+        .box-3d .back   { transform: rotateY(180deg) translateZ(30px); }
+        .box-3d .right  { transform: rotateY(90deg) translateZ(100px); }
+        .box-3d .left   { transform: rotateY(-90deg) translateZ(30px); }
+        .box-3d .top    { transform: rotateX(90deg) translateZ(30px); }
+        .box-3d .bottom { transform: rotateX(-90deg) translateZ(40px); }
+
+                /* Делаем прямоугольник главным для отсчета координат меток */
+            .shape-rectangle {
+            position: relative;
+            margin-top: 30px !important; /* Увеличили отступ сверху, чтобы буква 'a' не прилипала к заголовку */
+            margin-left: 20px !important; /* Отступ слева, чтобы буква 'b' не вылезала за экран */
+        }
+
+        /* Общие настройки для букв-подписей */
+        .label-side {
+            position: absolute;
+            font-size: 1.1rem;
+            font-weight: bold;
+            font-style: italic; /* Математические буквы обычно пишут курсивом */
+            color: #000000;
+        }
+
+        /* Позиционируем сторону 'a' (сверху по центру) */
+        .side-a {
+            top: -25px;         /* Сдвигаем на 25 пикселей НАД верхней рамкой */
+            left: 50%;          /* Сдвигаем на середину прямоугольника */
+            transform: translateX(-50%); /* Выравниваем ровно по центру */
+        }
+
+        /* Позиционируем сторону 'b' (слева по центру) */
+        .side-b {
+            left: -20px;        /* Сдвигаем на 20 пикселей СЛЕВА от рамки */
+            top: 50%;           /* Сдвигаем на середину по вертикали */
+            transform: translateY(-50%); /* Выравниваем ровно по центру */
+        }
+
+                /* Делаем квадрат и треугольник главными для отсчета координат */
+                .shape-square {
+            position: relative;
+            margin-top: 30px !important;
+        }
+        
+        .shape-triangle {
+            position: relative;
+            margin-top: 30px !important;
+            margin-left: 20px !important;
+            margin-bottom: 30px !important; /* Отступ снизу, чтобы буква 'c' не наезжала на текст */
+        }
+
+        /* Позиционируем сторону 'a' у квадрата (сверху по центру) */
+        .square-a {
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .square-a-left {
+            left: -20px !important;       /* Отодвигаем букву дальше НАЛЕВО, чтобы она вышла из рамки */
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+        }
+
+        .triangle-a {
+            position: absolute !important;
+            margin-top: -60px !important;  /* Сдвигаем вверх к левому склону */
+            margin-left: -25px !important; /* Отодвигаем левее от склона */
+        }
+        .triangle-b {
+            position: absolute !important;
+            margin-top: -60px !important;  /* Сдвигаем вверх к правому склону */
+            margin-left: 105px !important;
+        }
+
+        .triangle-c {
+            position: absolute !important;
+            margin-top: -5px !important;   /* Ставим ровно под черную линию */
+            margin-left: 42px !important;  /* Центрируем по ширине */
+        }
+
     </style>
 </head>
 <body>
@@ -64,23 +177,6 @@
     </header>
 
     <main class="spravka-container">
-        <details>
-            <summary>Таблица квадратов и кубов (от 11 до 20)</summary>
-            <table>
-                <tr>
-                    <th>a</th>
-                    <td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td>
-                </tr>
-                <tr>
-                    <th>a²</th>
-                    <td>121</td><td>144</td><td>169</td><td>196</td><td>225</td><td>256</td><td>289</td><td>324</td><td>361</td><td>400</td>
-                </tr>
-                <tr>
-                    <th>a³</th>
-                    <td>1331</td><td>1728</td><td>2197</td><td>2744</td><td>3375</td><td>4096</td><td>4913</td><td>5832</td><td>6859</td><td>8000</td>
-                </tr>
-            </table>
-        </details>
 
         <details>
             <summary>Свойства сложения и вычитания натуральных чисел</summary>
@@ -142,28 +238,67 @@
 
         <details>
             <summary>Формулы площади, периметра и объема</summary>
+            
             <h3>Прямоугольник:</h3>
+            <div class="geom-shape shape-rectangle">
+                <span class="label-side side-a">a</span>
+                <span class="label-side side-b">b</span>
+            </div>
             <ul>
                 <li>S = ab — площадь прямоугольника</li>
                 <li>P = 2(a + b) — периметр прямоугольника</li>
             </ul>
+
             <h3>Квадрат:</h3>
+            <div class="geom-shape shape-square">
+                <span class="label-side square-a">a</span>
+                <span class="label-side square-a-left">a</span>
+            </div>
             <ul>
                 <li>S = a² — площадь квадрата</li>
                 <li>P = 4a — периметр квадрата</li>
             </ul>
+
             <h3>Треугольник:</h3>
+            <div class="triangle-wrapper">
+                <div class="geom-shape shape-triangle"></div>
+                <span class="label-side triangle-a">a</span>
+                <span class="label-side triangle-b">b</span>
+                <span class="label-side triangle-c">c</span>
+            </div>
             <ul>
                 <li>S = ab : 2 — площадь прямоугольного треугольника</li>
                 <li>P = a + b + c — периметр треугольника</li>
             </ul>
+
             <h3>Параллелепипед:</h3>
-            <ul>
-                <li>S = 2(ab + bc + ac) — площадь поверхности</li>
-                <li>V = abc — объем параллелепипеда</li>
-                <li>P = 4(a + b + c) — длина всех ребер</li>
-            </ul>
+                <div class="scene">
+                    <div class="cube-3d box-3d">
+                        <div class="face front"></div>
+                        <div class="face back"></div>
+                        <div class="face right"></div>
+                        <div class="face left"></div>
+                        <div class="face top"></div>
+                        <div class="face bottom"></div>
+                    </div>
+                </div>
+                <ul>
+                    <li>S = 2(ab + bc + ac) — площадь поверхности</li>
+                    <li>V = abc — объем параллелепипеда</li>
+                    <li>P = 4(a + b + c) — длина всех ребер</li>
+                </ul>
+
             <h3>Куб:</h3>
+            <div class="scene">
+                <div class="cube-3d standard-cube">
+                    <div class="face front"></div>
+                    <div class="face back"></div>
+                    <div class="face right"></div>
+                    <div class="face left"></div>
+                    <div class="face top"></div>
+                    <div class="face bottom"></div>
+                </div>
+            </div>
             <ul>
                 <li>S = 6a² — площадь поверхности куба</li>
                 <li>V = a³ — объем куба</li>
@@ -171,6 +306,41 @@
             </ul>
         </details>
 
+                <!-- 7. Единицы объёма -->
+                <details>
+                    <summary>Единицы объёма</summary>
+                    <ul>
+                        <li>1 см³ = 1 000 мм³</li>
+                        <li>1 дм³ = 1 000 см³ = 1 000 000 мм³ = 1 л</li>
+                        <li>1 м³ = 1 000 дм³ = 1 000 000 см³ = 1 000 000 000 мм³ = 1 000 л</li>
+                        <li>1 км³ = 1 000 000 000 м³ = 1 000 000 000 000 дм³</li>
+                        <li>1 л = 1 000 мл = 1 дм³ = 1 000 см³ = 1 000 000 мм³</li>
+                        <li>1 мл = 1 см³ = 1 000 мм³</li>
+                    </ul>
+                </details>
+
+                <details>
+                    <summary>Таблица простых чисел (до 1000)</summary>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <tr><td>2</td><td>3</td><td>5</td><td>7</td><td>11</td><td>13</td><td>17</td><td>19</td><td>23</td><td>29</td><td>31</td><td>37</td></tr>
+                            <tr><td>41</td><td>43</td><td>47</td><td>53</td><td>59</td><td>61</td><td>67</td><td>71</td><td>73</td><td>79</td><td>83</td><td>89</td></tr>
+                            <tr><td>97</td><td>101</td><td>103</td><td>107</td><td>109</td><td>113</td><td>127</td><td>131</td><td>137</td><td>139</td><td>149</td><td>151</td></tr>
+                            <tr><td>157</td><td>163</td><td>167</td><td>173</td><td>179</td><td>181</td><td>191</td><td>193</td><td>197</td><td>199</td><td>211</td><td>223</td></tr>
+                            <tr><td>227</td><td>229</td><td>233</td><td>239</td><td>241</td><td>251</td><td>257</td><td>263</td><td>269</td><td>271</td><td>277</td><td>281</td></tr>
+                            <tr><td>283</td><td>293</td><td>307</td><td>311</td><td>313</td><td>317</td><td>331</td><td>337</td><td>347</td><td>349</td><td>353</td><td>359</td></tr>
+                            <tr><td>367</td><td>373</td><td>379</td><td>383</td><td>389</td><td>397</td><td>401</td><td>409</td><td>419</td><td>421</td><td>431</td><td>433</td></tr>
+                            <tr><td>439</td><td>443</td><td>449</td><td>457</td><td>461</td><td>463</td><td>467</td><td>479</td><td>487</td><td>491</td><td>499</td><td>503</td></tr>
+                            <tr><td>509</td><td>521</td><td>523</td><td>541</td><td>547</td><td>557</td><td>563</td><td>569</td><td>571</td><td>577</td><td>587</td><td>593</td></tr>
+                            <tr><td>599</td><td>601</td><td>607</td><td>613</td><td>617</td><td>619</td><td>631</td><td>641</td><td>643</td><td>647</td><td>653</td><td>659</td></tr>
+                            <tr><td>661</td><td>673</td><td>677</td><td>683</td><td>691</td><td>701</td><td>709</td><td>719</td><td>727</td><td>733</td><td>739</td><td>743</td></tr>
+                            <tr><td>751</td><td>757</td><td>761</td><td>769</td><td>773</td><td>787</td><td>797</td><td>809</td><td>811</td><td>821</td><td>823</td><td>827</td></tr>
+                            <tr><td>829</td><td>839</td><td>853</td><td>857</td><td>859</td><td>863</td><td>877</td><td>881</td><td>883</td><td>887</td><td>907</td><td>911</td></tr>
+                            <tr><td>919</td><td>929</td><td>937</td><td>941</td><td>947</td><td>953</td><td>967</td><td>971</td><td>977</td><td>983</td><td>991</td><td>997</td></tr>
+                        </table>
+                    </div>
+                </details>
+        
     </main>
 
 </body>
