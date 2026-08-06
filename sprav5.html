@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Справочные материалы 5 класс</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .spravka-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+            background: rgb(248, 245, 245);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        details {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 5px solid #3498db;
+            color: #2c3e50;
+        }
+        summary {
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+            user-select: none;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.95rem;
+            color: #2c3e50;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+            color: #2c3e50;
+        }
+        th { background-color: #f2f2f2; }
+        ul { padding-left: 20px; line-height: 1.6; }
+        .formula-block {
+            background: #eef7fc;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Справочные материалы</h1>
+    </header>
+
+    <main class="spravka-container">
+        <details>
+            <summary>Таблица квадратов и кубов (от 11 до 20)</summary>
+            <table>
+                <tr>
+                    <th>a</th>
+                    <td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td>
+                </tr>
+                <tr>
+                    <th>a²</th>
+                    <td>121</td><td>144</td><td>169</td><td>196</td><td>225</td><td>256</td><td>289</td><td>324</td><td>361</td><td>400</td>
+                </tr>
+                <tr>
+                    <th>a³</th>
+                    <td>1331</td><td>1728</td><td>2197</td><td>2744</td><td>3375</td><td>4096</td><td>4913</td><td>5832</td><td>6859</td><td>8000</td>
+                </tr>
+            </table>
+        </details>
+
+        <details>
+            <summary>Свойства сложения и вычитания натуральных чисел</summary>
+            <ul>
+                <li><strong>Переместительное:</strong> a + b = b + a</li>
+                <li><strong>Сочетательное:</strong> a + (b + c) = (a + b) + c = a + b + c</li>
+                <li><strong>Сложение с нулем:</strong> a + 0 = 0 + a = a</li>
+                <li><strong>Вычитание суммы из числа:</strong> a - (b + c) = a - b - c</li>
+                <li><strong>Вычитание числа из суммы:</strong> 
+                    <br>(a + b) - c = a + (b - c), если b > c
+                    <br>(a + b) - c = (a - c) + b, если a > c
+                </li>
+                <li><strong>Вычитание с нулем:</strong> a - 0 = a; a - a = 0</li>
+            </ul>
+        </details>
+
+        <details>
+            <summary>Свойства умножения и деления натуральных чисел</summary>
+            <ul>
+                <li><strong>Переместительное:</strong> a · b = b · a</li>
+                <li><strong>Сочетательное:</strong> a · (b · c) = (a · b) · c = a · b · c = abc</li>
+                <li><strong>Умножение на единицу:</strong> a · 1 = 1 · a = a</li>
+                <li><strong>Умножение на ноль:</strong> a · 0 = 0 · a = 0</li>
+                <li><strong>Распределительное свойство умножения относительно сложения:</strong><br>(a + b)c = ac + bc</li>
+                <li><strong>Распределительное свойство умножения относительно вычитания:</strong><br>(a - b)c = ac - bc</li>
+            </ul>
+        </details>
+
+        <details>
+            <summary>Формулы движения</summary>
+            <div class="formula-block">s = vt — расстояние</div>
+            <div class="formula-block">v = s : t — скорость</div>
+            <div class="formula-block">t = s : v — время</div>
+        </details>
+
+        <details>
+            <summary>Единицы длины, массы и площади</summary>
+            <h3>Длина:</h3>
+            <ul>
+                <li>1 см = 10 мм</li>
+                <li>1 дм = 10 см = 100 мм</li>
+                <li>1 м = 10 дм = 100 см = 1000 мм</li>
+                <li>1 км = 1 000 м = 10 000 дм = 100 000 см = 1 000 000 мм</li>
+            </ul>
+            <h3>Масса:</h3>
+            <ul>
+                <li>1 кг = 1000 г</li>
+                <li>1 ц = 100 кг = 100 000 г</li>
+                <li>1 т = 10 ц = 1000 кг = 1 000 000 г</li>
+            </ul>
+            <h3>Площадь:</h3>
+            <ul>
+                <li>1 см² = 100 мм²</li>
+                <li>1 дм² = 100 см² = 10 000 мм²</li>
+                <li>1 м² = 100 дм² = 10 000 см² = 1 000 000 мм²</li>
+                <li>1 км² = 100 га = 10 000 а = 1 000 000 м²</li>
+            </ul>
+        </details>
+
+        <details>
+            <summary>Формулы площади, периметра и объема</summary>
+            <h3>Прямоугольник:</h3>
+            <ul>
+                <li>S = ab — площадь прямоугольника</li>
+                <li>P = 2(a + b) — периметр прямоугольника</li>
+            </ul>
+            <h3>Квадрат:</h3>
+            <ul>
+                <li>S = a² — площадь квадрата</li>
+                <li>P = 4a — периметр квадрата</li>
+            </ul>
+            <h3>Треугольник:</h3>
+            <ul>
+                <li>S = ab : 2 — площадь прямоугольного треугольника</li>
+                <li>P = a + b + c — периметр треугольника</li>
+            </ul>
+            <h3>Параллелепипед:</h3>
+            <ul>
+                <li>S = 2(ab + bc + ac) — площадь поверхности</li>
+                <li>V = abc — объем параллелепипеда</li>
+                <li>P = 4(a + b + c) — длина всех ребер</li>
+            </ul>
+            <h3>Куб:</h3>
+            <ul>
+                <li>S = 6a² — площадь поверхности куба</li>
+                <li>V = a³ — объем куба</li>
+                <li>P = 12a — длина всех ребер куба</li>
+            </ul>
+        </details>
+
+    </main>
+
+</body>
+</html>
