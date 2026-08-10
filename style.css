@@ -136,3 +136,81 @@ header p{
     border: 2px solid #000000;
 }
 
+/* Вставьте это прямо в ваш файл .css */
+summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px 0;
+  }
+  
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  
+  .menu-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .menu-dots-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 0 10px;
+    color: #1e40af;
+  }
+  
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: white;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    z-index: 100;
+    min-width: 140px;
+  }
+  
+  .dropdown-menu.show {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Обновленная кнопка меню: выравниваем иконку и текст по центру */
+.dropdown-menu button {
+    background: none;
+    border: none;
+    padding: 10px 15px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    color: #334155;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Отступ между иконкой и текстом */
+    width: 100%;
+  }
+  
+  /* Настройки для векторных иконок */
+  .dropdown-menu button svg {
+    width: 18px;
+    height: 18px;
+    fill: #64748b; /* Спокойный серый цвет иконок по умолчанию */
+    transition: fill 0.2s ease;
+  }
+  
+  /* Эффект наведения: меняем цвет фона, текста и иконки */
+  .dropdown-menu button:hover {
+    background: #f1f5f9;
+    color: #1e40af;
+  }
+  
+  .dropdown-menu button:hover svg {
+    fill: #1e40af; /* Иконка становится синей при наведении */
+  }
+  
