@@ -645,7 +645,7 @@
         </details>
 
     </main>
-    <script src="html2pdf.bundle.min.js"></script>
+    <script src="https://cloudflare.com"></script>
     <script>
         function toggleMenu(event, button) {
             event.preventDefault();
@@ -675,17 +675,29 @@
             details.open = true;
 
             const pdfContainer = document.createElement('div');
+            pdfContainer.style.padding = '30px';
+            pdfContainer.style.fontFamily = 'Arial, sans-serif';
+            pdfContainer.style.backgroundColor = '#ffffff';
 
             const heading = document.createElement('h1');
             heading.innerText = title;
+            heading.style.color = '#1e40af';
+            heading.style.borderBottom = '2px solid #1e40af';
+            heading.style.paddingBottom = '10px';
+            heading.style.marginBottom = '20px';
+            heading.style.fontSize = '22px';
             pdfContainer.appendChild(heading);
 
             const listItems = details.querySelectorAll('li');
             if (listItems.length > 0) {
                 const ol = document.createElement('ol');
+                ol.style.paddingLeft = '20px';
+                ol.style.lineHeight = '1.8';
                 listItems.forEach(li => {
                     const item = document.createElement('li');
                     item.innerText = li.innerText;
+                    item.style.marginBottom = '10px';
+                    item.style.fontSize = '16px';
                     ol.appendChild(item);
                 });
                 pdfContainer.appendChild(ol);
@@ -694,18 +706,34 @@
             const table = details.querySelector('table');
             if (table) {
                 const tableClone = table.cloneNode(true);
+                tableClone.style.width = '100%';
+                tableClone.style.borderCollapse = 'collapse';
+                tableClone.style.marginTop = '20px';
+                tableClone.querySelectorAll('td, th').forEach(cell => {
+                    cell.style.border = '1px solid #cbd5e1';
+                    cell.style.padding = '8px';
+                    cell.style.textAlign = 'center';
+                    cell.style.fontSize = '14px';
+                });
                 pdfContainer.appendChild(tableClone);
             }
 
+            const opt = {
+                margin: 15,
+                filename: `${title}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
             try {
                 if (typeof html2pdf === 'undefined') {
-                    alert('Ошибка: Файл библиотеки html2pdf.bundle.min.js не найден или не подключен на строке 367.');
+                    alert('Библиотека еще загружается, подождите секунду или проверьте интернет-связь.');
                     return;
                 }
 
-                const pdfBlob = await html2pdf().from(pdfContainer).output('blob');
-
-                // Создаем файл для отправки в систему
+                // Генерируем НАСТОЯЩИЙ blob-файл PDF
+                const pdfBlob = await html2pdf().set(opt).from(pdfContainer).output('blob');
                 const file = new File([pdfBlob], `${title}.pdf`, { type: 'application/pdf' });
 
                 if (navigator.canShare && navigator.canShare({ files: [file] })) {
@@ -715,13 +743,13 @@
                         text: `Справочные материалы: ${title}`
                     });
                 } else {
-                    // Альтернативный вариант для ПК — скачивание готового файла
                     const link = document.createElement('a');
                     link.href = URL.createObjectURL(pdfBlob);
                     link.download = `${title}.pdf`;
                     link.click();
                     URL.revokeObjectURL(link.href);
                 }
+
             } catch (error) {
                 alert('Не удалось обработать PDF: ' + error.message);
             } finally {
