@@ -272,31 +272,18 @@
                 <div class="menu-container">
                     <button class="menu-dots-btn" onclick="toggleMenu(event, this)">⋮</button>
                     <div class="dropdown-menu">
+                        <!-- Одна кнопка, которая решает обе задачи сразу -->
                         <button onclick="printCurrentDetails(this)">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z" />
-                            </svg>
-                            <span>Распечатать</span>
+                          <svg viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+                          <span>Сохранить в PDF / Печать</span>
                         </button>
-
-                        <button onclick="shareAsPdf(this)">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v1.25c0 .41-.34.75-.75.75s-.75-.34-.75-.75V8c0-.55.45-1 1-1H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2c-.55 0-1-.45-1-1V8c0-.55.45-1 1-1h2c.83 0 1.5.67 1.5 1.5v3.5zm4-2.75c0 .41-.34.75-.75.75H18.25V11H19c.41 0 .75.34.75.75s-.34.75-.75.75h-.75v1.25c0 .41-.34.75-.75.75s-.75-.34-.75-.75V8c0-.55.45-1 1-1h2c.41 0 .75.34.75.75zM9 10h1V8.5H9V10zm5.5 2V8.5h-1V12h1zM4 6c-.55 0-1 .45-1 1v13c0 1.1.9 2 2 2h13c.55 0 1-.45 1-1s-.45-1-1-1H5V7c0-.55-.45-1-1-1z" />
-                            </svg>
-                            <span>Отправить в PDF</span>
-                        </button>
-
-                        <a href="mailto:?subject=Справочные%20материалы&body=Привет!%20Посмотри%20сайт%20со%20справочными%20материалами."
-                            onclick="event.stopPropagation();">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                            </svg>
-                            <span>Почта</span>
+                      
+                        <a href="#" onclick="shareToEmail(event, this)">
+                          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                          <span>Почта</span>
                         </a>
-                    </div>
+                      </div>
+                      
                 </div>
             </summary>
             <ul>
@@ -646,98 +633,43 @@
 
     </main>
     <script>
-        /* html2pdf.js v0.10.1 minified stub embedded directly */
-        !function (e, t) { "object" == typeof exports && "object" == typeof module ? module.exports = t(require("jspdf"), require("html2canvas")) : "function" == typeof define && define.amd ? define(["jspdf", "html2canvas"], t) : "object" == typeof exports ? exports.html2pdf = t(require("jspdf"), require("html2canvas")) : (e.html2pdf = e.html2pdf || {}, e.html2pdf = t(e.jsPDF, e.html2canvas)) }(this, function (e, t) { return function (e) { var t = {}; function n(r) { if (t[r]) return t[r].exports; var o = t[r] = { i: r, l: !1, exports: {} }; return e[r].call(o.exports, o, o.exports, n), o.l = !0, o.exports } return n.m = e, n.c = t, n.d = function (e, t, r) { n.o(e, t) || Object.defineProperty(e, t, { enumerable: !0, get: r }) }, n.r = function (e) { "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }), Object.defineProperty(e, "__esModule", { value: !0 }) }, n.t = function (e, t) { if (1 & t && (e = n(e)), 8 & t) return e; if (4 & t && "object" == typeof e && e && e.__esModule) return e; var r = Object.create(null); if (n.r(r), Object.defineProperty(r, "default", { enumerable: !0, value: e }), 2 & t && "string" != typeof e) for (var o in e) n.d(r, o, function (t) { return e[t] }.bind(null, o)); return r }, n.n = function (e) { var t = e && e.__esModule ? function () { return e.default } : function () { return e }; return n.d(t, "a", t), t }, n.o = function (e, t) { return Object.prototype.hasOwnProperty.call(e, t) }, n.p = "", n(n.s = 0) }([function (e, t, n) { "use strict"; n.r(t); var r = function () { function e(e) { this.src = e, this.canvas = null, this.img = null, this.pdf = null } return e.prototype.from = function (e) { return this.src = e, this }, e.prototype.toContainer = function () { return this }, e.prototype.toCanvas = function () { return this }, e.prototype.toPdf = function () { return this }, e.prototype.output = function (e) { var t = this; return new Promise(function (n) { if ("blob" === e) { var r = t.src.querySelector("h1") ? t.src.querySelector("h1").innerText : "Документ", o = "<!DOCTYPE html><html><head><meta charset='utf-8'><title>" + r + "</title><style>body{font-family:sans-serif;padding:30px;color:#333}h1{color:#1e40af;border-bottom:2px solid #1e40af;padding-bottom:10px}ol{padding-left:20px}li{margin-bottom:10px;font-size:16px}table{width:100%;border-collapse:collapse;margin-top:20px}td,th{border:1px solid #cbd5e1;padding:8px;text-align:center}</style></head><body>" + t.src.innerHTML + "</body></html>", i = new Blob([o], { type: "text/html" }), a = new FileReader; a.onload = function () { var e = new Blob([a.result], { type: "application/pdf" }); n(e) }, a.readAsArrayBuffer(i) } }) }, e.prototype.set = function (e) { return this }, e }(); t.default = function (e, t) { return new r }.bind(null, e, t) }]) });
-
-        /* Основная логика вашего сайта */
         function toggleMenu(event, button) {
-            event.preventDefault();
-            event.stopPropagation();
-            const currentMenu = button.nextElementSibling;
-            document.querySelectorAll('.dropdown-menu').forEach(menu => {
-                if (menu !== currentMenu) menu.classList.remove('show');
-            });
-            currentMenu.classList.toggle('show');
+          event.preventDefault();
+          event.stopPropagation();
+          const currentMenu = button.nextElementSibling;
+          document.querySelectorAll('.dropdown-menu').forEach(menu => {
+            if (menu !== currentMenu) menu.classList.remove('show');
+          });
+          currentMenu.classList.toggle('show');
         }
-
+        
         function printCurrentDetails(button) {
-            const details = button.closest('details');
-            const originalOpen = details.open;
-            details.open = true;
-            details.classList.add('printing-now');
-            window.print();
-            details.classList.remove('printing-now');
-            details.open = originalOpen;
+          const details = button.closest('details');
+          const originalOpen = details.open;
+          details.open = true;
+          details.classList.add('printing-now');
+          
+          // Запускает родное системное окно телефона
+          window.print();
+          
+          details.classList.remove('printing-now');
+          details.open = originalOpen;
         }
-
-        async function shareAsPdf(button) {
-            const details = button.closest('details');
-            const title = details.querySelector('.summary-text').innerText;
-
-            const originalOpen = details.open;
-            details.open = true;
-
-            const pdfContainer = document.createElement('div');
-
-            const heading = document.createElement('h1');
-            heading.innerText = title;
-            pdfContainer.appendChild(heading);
-
-            const listItems = details.querySelectorAll('li');
-            if (listItems.length > 0) {
-                const ol = document.createElement('ol');
-                listItems.forEach(li => {
-                    const item = document.createElement('li');
-                    item.innerText = li.innerText;
-                    ol.appendChild(item);
-                });
-                pdfContainer.appendChild(ol);
-            }
-
-            const table = details.querySelector('table');
-            if (table) {
-                const tableClone = table.cloneNode(true);
-                pdfContainer.appendChild(tableClone);
-            }
-
-            try {
-                // Вызываем встроенную библиотеку, которая теперь конвертирует файл через ArrayBuffer
-                const pdfBlob = await window.html2pdf().from(pdfContainer).output('blob');
-                const file = new File([pdfBlob], `${title}.pdf`, { type: 'application/pdf' });
-
-                if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                    await navigator.share({
-                        files: [file],
-                        title: title,
-                        text: `Справочные материалы: ${title}`
-                    });
-                } else {
-                    const link = document.createElement('a');
-                    link.href = URL.createObjectURL(pdfBlob);
-                    link.download = `${title}.pdf`;
-                    link.click();
-                    URL.revokeObjectURL(link.href);
-                }
-            } catch (error) {
-                alert('Ошибка отправки: ' + error.message);
-            } finally {
-                details.open = originalOpen;
-            }
-        }
-
+        
         function shareToEmail(event, element) {
-            event.stopPropagation();
-            const title = element.closest('summary').querySelector('.summary-text').innerText;
-            const currentUrl = window.location.href;
-            element.href = `mailto:?subject=${encodeURIComponent(`Справочные материалы: ${title}`)}&body=${encodeURIComponent(`Привет! Вот ссылка на сайт со справочными материалами:\n${currentUrl}`)}`;
+          event.stopPropagation();
+          const title = element.closest('summary').querySelector('.summary-text').innerText;
+          const currentUrl = window.location.href;
+          element.href = `mailto:?subject=${encodeURIComponent(`Справочные материалы: ${title}`)}&body=${encodeURIComponent(`Привет! Вот ссылка на сайт со справочными материалами:\n${currentUrl}`)}`;
         }
-
-        window.onclick = function () {
-            document.querySelectorAll('.dropdown-menu').forEach(menu => {
-                menu.classList.remove('show');
-            });
+        
+        window.onclick = function() {
+          document.querySelectorAll('.dropdown-menu').forEach(menu => {
+            menu.classList.remove('show');
+          });
         }
-    </script>
+        </script>
+        
 
 </body>
 
