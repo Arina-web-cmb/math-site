@@ -396,7 +396,19 @@
           const title = button.closest('summary').querySelector('.summary-text').innerText;
           const url = encodeURIComponent(window.location.href);
           const text = encodeURIComponent(`Посмотри формулы по теме: ${title}`);
-          window.open(`https://t.me{url}&text=${text}`, '_blank');
+          setTimeout(() => {
+                window.open(`https://t.me{url}&text=${text}`, '_blank');
+          }, 50);
+        }
+
+        function shareToMax(button) {
+            const title = button.closest('summary').querySelector('.summary-text').innerText;
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(`Справочные материалы по теме: ${title}`);
+  
+            setTimeout(() => {
+                window.open(`https://max.ru{url}&text=${text}`, '_blank');
+            }, 50);
         }
         
         function shareToEmail(button) {
@@ -404,7 +416,10 @@
           const url = window.location.href;
           const subject = encodeURIComponent(`Справочные материалы: ${title}`);
           const body = encodeURIComponent(`Привет! Вот ссылка на сайт со справочными материалами:\n${url}`);
-          window.open(`mailto:?subject=${subject}&body=${body}`, '_self');
+          
+          setTimeout(() => {
+                window.open(`mailto:?subject=${subject}&body=${body}`, '_self');
+          }, 50);
         }
         
         window.onclick = function() {
