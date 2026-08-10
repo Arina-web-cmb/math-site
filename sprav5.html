@@ -191,9 +191,9 @@
                           <span>Распечатать</span>
                         </button>
 
-                        <button onclick="shareAsFile(this)">
-                          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1 .22-1.62.15-.15 2.7-2.46 2.75-2.67.01-.03.01-.15-.06-.21-.07-.06-.17-.04-.25-.02-.11.02-1.84 1.16-5.2 3.43-.49.34-.94.5-1.34.49-.45-.01-1.31-.25-1.95-.46-.78-.26-1.4-.4-1.35-.85.03-.24.35-.48.97-.73 3.78-1.64 6.31-2.72 7.57-3.23 3.61-1.44 4.36-1.69 4.85-1.7.11 0 .36.03.52.16.13.12.17.28.19.39.02.13.03.41.01.62z"/></svg>
-                          <span>Отправить файлом(.txt)</span>
+                        <button onclick="shareAsPdf(this)">
+                          <svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v1.25c0 .41-.34.75-.75.75s-.75-.34-.75-.75V8c0-.55.45-1 1-1H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2c-.55 0-1-.45-1-1V8c0-.55.45-1 1-1h2c.83 0 1.5.67 1.5 1.5v3.5zm4-2.75c0 .41-.34.75-.75.75H18.25V11H19c.41 0 .75.34.75.75s-.34.75-.75.75h-.75v1.25c0 .41-.34.75-.75.75s-.75-.34-.75-.75V8c0-.55.45-1 1-1h2c.41 0 .75.34.75.75zM9 10h1V8.5H9V10zm5.5 2V8.5h-1V12h1zM4 6c-.55 0-1 .45-1 1v13c0 1.1.9 2 2 2h13c.55 0 1-.45 1-1s-.45-1-1-1H5V7c0-.55-.45-1-1-1z"/></svg>
+                          <span>Отправить в PDF</span>
                         </button>
                         
                         <a href="mailto:?subject=Справочные%20материалы&body=Привет!%20Посмотри%20сайт%20со%20справочными%20материалами." onclick="event.stopPropagation();">  
@@ -365,78 +365,90 @@
                 </details>
         
     </main>
+    <script src="https://cloudflare.com"></script>
     <script>
     function toggleMenu(event, button) {
-        event.preventDefault();
-        event.stopPropagation();
-        const currentMenu = button.nextElementSibling;
-        document.querySelectorAll('.dropdown-menu').forEach(menu => {
-          if (menu !== currentMenu) menu.classList.remove('show');
-        });
-        currentMenu.classList.toggle('show');
-      }
-      
-      function printCurrentDetails(button) {
-        const details = button.closest('details');
-        const originalOpen = details.open;
-        details.open = true;
-        details.classList.add('printing-now');
-        window.print();
-        details.classList.remove('printing-now');
-        details.open = originalOpen;
-      }
-      
-      // ФУНКЦИЯ ДЛЯ ОТПРАВКИ ТЕМЫ В ВИДЕ ФАЙЛА В МЕССЕНДЖЕРЫ
-      async function shareAsFile(button) {
-        const details = button.closest('details');
-        const title = details.querySelector('.summary-text').innerText;
-        
-        // Собираем весь текст формул и пунктов из раскрывающегося списка
-        let fileContent = `Тема: ${title}\n\n`;
-        details.querySelectorAll('li').forEach((li, index) => {
-          fileContent += `${index + 1}. ${li.innerText}\n`;
-        });
-        fileContent += `\nСсылка на сайт: ${window.location.href}`;
-      
-        // Создаем файл в памяти браузера
-        const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
-        const file = new File([blob], `${title}.txt`, { type: 'text/plain' });
-      
-        // Проверяем, поддерживает ли мобильный браузер отправку файлов
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          try {
-            await navigator.share({
-              files: [file],
-              title: title,
-              text: `Справочные материалы по теме: ${title}`
-            });
-          } catch (error) {
-            console.log('Пользователь отменил отправку или произошла ошибка:', error);
-          }
-        } else {
-          // Если браузер устарел или открыт на ПК, файл просто скачается на устройство
-          const link = document.createElement('a');
-          link.href = URL.createObjectURL(blob);
-          link.download = `${title}.txt`;
-          link.click();
-          URL.revokeObjectURL(link.href);
-        }
-      }
-      
-      // Обновленная функция почты (теперь без точки, выводит реальный адрес страницы)
-      function shareToEmail(event, element) {
-        event.stopPropagation();
-        const title = element.closest('summary').querySelector('.summary-text').innerText;
-        const currentUrl = window.location.href;
-        
-        element.href = `mailto:?subject=${encodeURIComponent(`Справочные материалы: ${title}`)}&body=${encodeURIComponent(`Привет! Вот ссылка на сайт со справочными материалами:\n${currentUrl}`)}`;
-      }
-      
-      window.onclick = function() {
-        document.querySelectorAll('.dropdown-menu').forEach(menu => {
-          menu.classList.remove('show');
-        });
-      }
+  event.preventDefault();
+  event.stopPropagation();
+  const currentMenu = button.nextElementSibling;
+  document.querySelectorAll('.dropdown-menu').forEach(menu => {
+    if (menu !== currentMenu) menu.classList.remove('show');
+  });
+  currentMenu.classList.toggle('show');
+}
+
+function printCurrentDetails(button) {
+  const details = button.closest('details');
+  const originalOpen = details.open;
+  details.open = true;
+  details.classList.add('printing-now');
+  window.print();
+  details.classList.remove('printing-now');
+  details.open = originalOpen;
+}
+
+async function shareAsPdf(button) {
+  const details = button.closest('details');
+  const title = details.querySelector('.summary-text').innerText;
+  
+  const originalOpen = details.open;
+  details.open = true;
+
+  const elementToElement = details.cloneNode(true);
+  elementToElement.querySelector('.menu-container').remove();
+  
+  elementToElement.style.padding = '20px';
+  elementToElement.style.fontFamily = 'Arial, sans-serif';
+  elementToElement.style.color = '#333';
+  elementToElement.style.background = '#ffffff';
+
+  const opt = {
+    margin: 10,
+    filename: `${title}.pdf`,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+
+  try {
+    const pdfWorker = html2pdf().set(opt).from(elementToElement);
+    const pdfBlob = await pdfWorker.output('blob');
+    
+    const file = new File([pdfBlob], `${title}.pdf`, { type: 'application/pdf' });
+
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({
+        files: [file],
+        title: title,
+        text: `Справочные материалы: ${title}`
+      });
+    } else {
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(pdfBlob);
+      link.download = `${title}.pdf`;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    }
+  } catch (error) {
+    console.error('Ошибка генерации или отправки PDF:', error);
+  } finally {
+    details.open = originalOpen;
+  }
+}
+
+function shareToEmail(event, element) {
+  event.stopPropagation();
+  const title = element.closest('summary').querySelector('.summary-text').innerText;
+  const currentUrl = window.location.href;
+  element.href = `mailto:?subject=${encodeURIComponent(`Справочные материалы: ${title}`)}&body=${encodeURIComponent(`Привет! Вот ссылка на сайт со справочными материалами:\n${currentUrl}`)}`;
+}
+
+window.onclick = function() {
+  document.querySelectorAll('.dropdown-menu').forEach(menu => {
+    menu.classList.remove('show');
+  });
+}
+
     </script>    
 </body>
 </html>
