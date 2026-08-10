@@ -181,8 +181,7 @@ summary {
     flex-direction: column;
   }
   
-  /* Обновленная кнопка меню: выравниваем иконку и текст по центру */
-.dropdown-menu button {
+.dropdown-menu button, .dropdown-menu a {
     background: none;
     border: none;
     padding: 10px 15px;
@@ -192,25 +191,25 @@ summary {
     color: #334155;
     display: flex;
     align-items: center;
-    gap: 10px; /* Отступ между иконкой и текстом */
+    gap: 10px;
     width: 100%;
+    text-decoration: none; /* Убирает подчеркивание ссылки */
+    box-sizing: border-box;
   }
   
-  /* Настройки для векторных иконок */
-  .dropdown-menu button svg {
+  .dropdown-menu button svg, .dropdown-menu a svg {
     width: 18px;
     height: 18px;
-    fill: #64748b; /* Спокойный серый цвет иконок по умолчанию */
+    fill: #64748b;
     transition: fill 0.2s ease;
   }
   
-  /* Эффект наведения: меняем цвет фона, текста и иконки */
-  .dropdown-menu button:hover {
+  .dropdown-menu button:hover, .dropdown-menu a:hover {
     background: #f1f5f9;
     color: #1e40af;
   }
   
-  .dropdown-menu button:hover svg {
-    fill: #1e40af; /* Иконка становится синей при наведении */
+  .dropdown-menu button:hover svg, .dropdown-menu a:hover svg {
+    fill: #1e40af;
   }
   

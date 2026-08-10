@@ -191,21 +191,21 @@
                           <svg viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
                           <span>Распечатать</span>
                         </button>
-                        <button onclick="shareToTelegram(this)">
-                          
+
+                        <a href="#" target="_blank" onclick="prepareLink(event, this, 'telegram')">  
                           <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1 .22-1.62.15-.15 2.7-2.46 2.75-2.67.01-.03.01-.15-.06-.21-.07-.06-.17-.04-.25-.02-.11.02-1.84 1.16-5.2 3.43-.49.34-.94.5-1.34.49-.45-.01-1.31-.25-1.95-.46-.78-.26-1.4-.4-1.35-.85.03-.24.35-.48.97-.73 3.78-1.64 6.31-2.72 7.57-3.23 3.61-1.44 4.36-1.69 4.85-1.7.11 0 .36.03.52.16.13.12.17.28.19.39.02.13.03.41.01.62z"/></svg>
                           <span>Telegram</span>
-                        </button>
-                        <button onclick="shareToMax(this)">
-                          
+                        </a>
+                        
+                        <a href="#" target="_blank" onclick="prepareLink(event, this, 'max')">  
                           <svg viewBox="0 0 24 24"><path d="M19.36 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.64-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z"/></svg>
                           <span>MAX</span>
-                        </button>
-                        <button onclick="shareToEmail(this)">
-                          
+                        </a>
+                        
+                        <a href="#" onclick="prepareLink(event, this, 'email')">  
                           <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                           <span>Почта</span>
-                        </button>
+                        </a>
                       </div>     
                 </div>
             </summary>
@@ -372,62 +372,49 @@
         
     </main>
     <script>
-        function toggleMenu(event, button) {
-          event.preventDefault();
-          event.stopPropagation();
-          const currentMenu = button.nextElementSibling;
-          document.querySelectorAll('.dropdown-menu').forEach(menu => {
-            if (menu !== currentMenu) menu.classList.remove('show');
-          });
-          currentMenu.classList.toggle('show');
+    function toggleMenu(event, button) {
+        event.preventDefault();
+        event.stopPropagation();
+        const currentMenu = button.nextElementSibling;
+        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+          if (menu !== currentMenu) menu.classList.remove('show');
+        });
+        currentMenu.classList.toggle('show');
+      }
+      
+      function printCurrentDetails(button) {
+        const details = button.closest('details');
+        const originalOpen = details.open;
+        details.open = true;
+        details.classList.add('printing-now');
+        window.print();
+        details.classList.remove('printing-now');
+        details.open = originalOpen;
+      }
+      
+      function prepareLink(event, element, type) {
+        event.stopPropagation();
+        const title = element.closest('summary').querySelector('.summary-text').innerText;
+        const currentUrl = window.location.href;
+        let finalHref = '';
+      
+        if (type === 'telegram') {
+          finalHref = `https://t.me{encodeURIComponent(currentUrl)}&text=${encodeURIComponent(`Посмотри формулы по теме: ${title}`)}`;
+        } else if (type === 'max') {
+          finalHref = `https://max.ru{encodeURIComponent(currentUrl)}&text=${encodeURIComponent(`Справочные материалы по теме: ${title}`)}`;
+        } else if (type === 'email') {
+          finalHref = `mailto:?subject=${encodeURIComponent(`Справочные материалы: ${title}`)}&body=${encodeURIComponent(`Привет! Вот ссылка на сайт со справочными материалами:\n${currentUrl}`)}`;
         }
-        
-        function printCurrentDetails(button) {
-          const details = button.closest('details');
-          const originalOpen = details.open;
-          details.open = true;
-          details.classList.add('printing-now');
-          window.print();
-          details.classList.remove('printing-now');
-          details.open = originalOpen;
-        }
-        
-        function shareToTelegram(button) {
-          const title = button.closest('summary').querySelector('.summary-text').innerText;
-          const url = encodeURIComponent(window.location.href);
-          const text = encodeURIComponent(`Посмотри формулы по теме: ${title}`);
-          setTimeout(() => {
-                window.open(`https://t.me{url}&text=${text}`, '_blank');
-          }, 50);
-        }
-
-        function shareToMax(button) {
-            const title = button.closest('summary').querySelector('.summary-text').innerText;
-            const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent(`Справочные материалы по теме: ${title}`);
-  
-            setTimeout(() => {
-                window.open(`https://max.ru{url}&text=${text}`, '_blank');
-            }, 50);
-        }
-        
-        function shareToEmail(button) {
-          const title = button.closest('summary').querySelector('.summary-text').innerText;
-          const url = window.location.href;
-          const subject = encodeURIComponent(`Справочные материалы: ${title}`);
-          const body = encodeURIComponent(`Привет! Вот ссылка на сайт со справочными материалами:\n${url}`);
-          
-          setTimeout(() => {
-                window.open(`mailto:?subject=${subject}&body=${body}`, '_self');
-          }, 50);
-        }
-        
-        window.onclick = function() {
-          document.querySelectorAll('.dropdown-menu').forEach(menu => {
-            menu.classList.remove('show');
-          });
-        }
-        </script>
+      
+        element.href = finalHref;
+      }
+      
+      window.onclick = function() {
+        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+          menu.classList.remove('show');
+        });
+      }
+    </script>
         
 </body>
 </html>
